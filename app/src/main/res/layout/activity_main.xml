@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dip"
+        android:background="@android:color/white">
+
+    <TextView
+            android:id="@+id/tvCurrent"
+            android:layout_width="match_parent"
+            android:layout_height="36dip"
+            android:text="Current"
+            android:gravity="start|center_vertical"/>
+
+    <GridView
+            android:id="@+id/gvDpis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"
+            android:layout_below="@+id/tvCurrent"
+            android:layout_above="@+id/tvHint"
+            android:layout_marginTop="16dip"
+            android:layout_marginBottom="16dip"/>
+
+    <TextView
+            android:id="@+id/tvHint"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_above="@+id/gvColor"
+            android:layout_marginTop="8dip"
+            android:layout_marginBottom="8dip"
+            android:text="@string/view_hint"/>
+
+    <GridView
+            android:id="@+id/gvColor"
+            android:layout_width="match_parent" android:layout_height="48dip"
+            android:layout_alignParentBottom="true"
+            android:numColumns="6"/>
+
+</RelativeLayout>
