@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.GridView
 import android.widget.TextView
-import rarnu.com.midpi.root.MiscUtils
 import rarnu.com.midpi.root.RootAPI
 
 class MainActivity : Activity(), AdapterView.OnItemClickListener, MessageDialog.OnMikuClickListener {
@@ -42,7 +41,7 @@ class MainActivity : Activity(), AdapterView.OnItemClickListener, MessageDialog.
         gvColor?.adapter = adapterColor
         gvColor?.onItemClickListener = this
 
-        if (!checkMIUI()) return
+        if (!checkCanEdit()) return
         if (!rootAndMount()) return
 
         getCurrentDensity()
@@ -101,9 +100,9 @@ class MainActivity : Activity(), AdapterView.OnItemClickListener, MessageDialog.
         return true
     }
 
-    private fun checkMIUI(): Boolean {
-        if (!MiscUtils.isMIUI(this)) {
-            MessageDialog.Builder(this).setTitle(R.string.msg_hint).setMessage(R.string.msg_not_miui).setMikuClickListener(this).show()
+    private fun checkCanEdit(): Boolean {
+        if (!RootAPI.canEditDPI()) {
+            MessageDialog.Builder(this).setTitle(R.string.msg_hint).setMessage(R.string.msg_cannot_edit_dpi).setMikuClickListener(this).show()
             return false
         }
         return true

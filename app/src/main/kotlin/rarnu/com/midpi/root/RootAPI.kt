@@ -83,6 +83,11 @@ object RootAPI {
         return str.toInt()
     }
 
+    fun canEditDPI(): Boolean {
+        val list = BuildPropUtils.buildProp
+        return list!!.any { it.buildName == "ro.sf.lcd_density" }
+    }
+
     fun setDensity(value: Int): Boolean {
         val list = BuildPropUtils.buildProp
         list!!.forEach { if (it.buildName == "ro.sf.lcd_density") { it.buildValue = "$value" } }
@@ -90,6 +95,10 @@ object RootAPI {
         if (bProp) {
             var ret: RootUtils.CommandResult = RootUtils.runCommand("wm density $value", true)
             Log.e("RootAPI", "result: ${ret.result}, error: ${ret.error}")
+            if (ret.error == "") {
+                ret = RootUtils.runCommand("wm density reset", true)
+                Log.e("RootAPI", "result: ${ret.result}, error: ${ret.error}")
+            }
             if (ret.error == "") {
                 ret = RootUtils.runCommand("reboot", true)
                 Log.e("RootAPI", "result: ${ret.result}, error: ${ret.error}")
