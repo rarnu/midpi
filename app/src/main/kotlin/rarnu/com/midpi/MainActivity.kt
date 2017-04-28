@@ -118,11 +118,13 @@ class MainActivity : Activity(), AdapterView.OnItemClickListener, MessageDialog.
             MessageDialog.Builder(this).setTitle(R.string.msg_hint).setMessage(R.string.msg_no_root).setMikuClickListener(this).show()
             return false
         }
+	/*
         val bRW = RootAPI.isSystemRW()
         if (!bRW) {
             MessageDialog.Builder(this).setTitle(R.string.msg_hint).setMessage(R.string.msg_system_verity).setMikuClickListener(this).show()
             return false
         }
+	*/
         return true
     }
 
