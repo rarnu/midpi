@@ -41,7 +41,6 @@ class MainActivity : Activity(), AdapterView.OnItemClickListener, MessageDialog.
         gvColor?.adapter = adapterColor
         gvColor?.onItemClickListener = this
 
-        if (!checkCanEdit()) return
         if (!rootAndMount()) return
 
         getCurrentDensity()
@@ -96,14 +95,6 @@ class MainActivity : Activity(), AdapterView.OnItemClickListener, MessageDialog.
                 // TODO: about
                 MessageDialog.Builder(this).setTitle(R.string.msg_about).setMessage(R.string.msg_github).show()
             }
-        }
-        return true
-    }
-
-    private fun checkCanEdit(): Boolean {
-        if (!RootAPI.canEditDPI()) {
-            MessageDialog.Builder(this).setTitle(R.string.msg_hint).setMessage(R.string.msg_cannot_edit_dpi).setMikuClickListener(this).show()
-            return false
         }
         return true
     }

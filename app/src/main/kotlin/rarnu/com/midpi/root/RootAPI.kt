@@ -83,14 +83,14 @@ object RootAPI {
         return str.toInt()
     }
 
-    fun canEditDPI(): Boolean {
-        val list = BuildPropUtils.buildProp
-        return list!!.any { it.buildName == "ro.sf.lcd_density" }
-    }
-
     fun setDensity(value: Int): Boolean {
         val list = BuildPropUtils.buildProp
-        list!!.forEach { if (it.buildName == "ro.sf.lcd_density") { it.buildValue = "$value" } }
+        var found = false
+        list!!.forEach { if (it.buildName == "ro.sf.lcd_density") {
+            it.buildValue = "$value"
+            found = true
+        } }
+        if (!found) { list!!.add(BuildPropUtils.BuildPropInfo("ro.sf.lcd_density", "$value")) }
         val bProp = BuildPropUtils.setBuildProp(list)
         if (bProp) {
             var ret: RootUtils.CommandResult = RootUtils.runCommand("wm density $value", true)
